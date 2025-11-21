@@ -17,6 +17,7 @@ import * as defaults from '@aws-solutions-constructs/core';
 
 import { StateMachineFactory, StateMachineFactoryProps, StateMachineFactoryResponse } from './state-machine-factory';
 import { BucketFactory, S3BucketFactoryProps, S3BucketFactoryResponse } from './bucket-factory';
+import { SnsTopicFactoryProps, SnsTopicFactoryResponse, TopicFactory } from "./topic-factory";
 import { SqsQueueFactoryProps, SqsQueueFactoryResponse, QueueFactory } from './queue-factory';
 import { VpcFactory, VpcFactoryProps, VpcFactoryResponse } from './vpc-factory';
 export class ConstructsFactories extends Construct {
@@ -25,6 +26,12 @@ export class ConstructsFactories extends Construct {
     defaults.CheckS3Props(props);
 
     return BucketFactory.factory(this, id, props);
+  }
+
+  public snsTopicFactory(id: string, props: SnsTopicFactoryProps): SnsTopicFactoryResponse {
+    defaults.CheckSnsProps(props);
+
+    return TopicFactory.factory(this, id, props);
   }
 
   public stateMachineFactory(id: string, props: StateMachineFactoryProps): StateMachineFactoryResponse {
